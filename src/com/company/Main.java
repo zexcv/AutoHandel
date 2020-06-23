@@ -7,15 +7,18 @@ import com.company.Mechanic;
 public class Main {
 
     public static void main(String[] args) {
+        Car car = new Car();
+        System.out.println(car);
         Player player = new Player();
         Scanner skaner = new Scanner(System.in);
         System.out.println("Jak się nazywasz?");
         player.name = skaner.nextLine();
         System.out.println("Cześć " + player.name + "!. Miło mi Cię powitać w Twoim nowym komisie samochodowym :-)");
         System.out.println("Nie masz jeszcze żadnych aut, więc na początek polecam Ci jakieś kupić , żeby móc je potem sprzedać z zyskiem. Widzę, że masz $" + (player.getFunds()) + ". To na początek wystarczy." );
-        //MENU WYBORU
-        boolean mainLoop = true;
 
+        //MENU
+        int tury=0;
+        boolean mainLoop = true;
         int choice;
        while(true) {
            System.out.println("0. BAZA SAMOCHODÓW DO KUPIENIA");
