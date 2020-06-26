@@ -4,8 +4,13 @@ import java.util.Random;
 
 public class Car {
     public String toString(){
-        String info = getMarka() + " " + getColor() + " " + getSegment() + " " + getValue();
-        return info;
+        String marka = "Marka: " + getMarka();
+        String kolor = "Kolor: " + getColor();
+        String segment = "Segment: " + getSegment();
+        String value = "Cena: " + "$" + getValue();
+        String km = "Przebieg: " + przebieg + "KM";
+        String rhyme = marka + "\r\n" + kolor + "\r\n" + segment + "\r\n" + value + "\r\n" + km + "\r\n";
+        return rhyme;
     }
     private int przebieg;
     private double value;
@@ -29,6 +34,7 @@ public class Car {
             marka = lista_marka[nr_marka];
             color = lista_color[nr_color];
             segment = lista_segment[nr_segment];
+            przebieg = nr_przebieg;
 
             if(getMarka() == lista_marka[0] || getMarka() == lista_marka[1]){
                 if (getSegment() == lista_segment[0]){
