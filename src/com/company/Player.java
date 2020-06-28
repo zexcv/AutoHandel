@@ -1,7 +1,7 @@
 package com.company;
 
 public class Player {
-    private double funds = 10000;
+    private double funds = 1000000;
     public String name;
 
     public double getFunds() {

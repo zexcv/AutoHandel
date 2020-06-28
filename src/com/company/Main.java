@@ -1,6 +1,7 @@
 package com.company;
 
 import java.lang.reflect.Array;
+import java.sql.SQLOutput;
 import java.util.*;
 
 public class Main {
@@ -13,16 +14,35 @@ public class Main {
         Scanner skaner = new Scanner(System.in);
         System.out.println("Jak się nazywasz?");
         player.name = skaner.nextLine();
-        System.out.println("Cześć " + player.name + "!. Miło mi Cię powitać w Twoim nowym komisie samochodowym :-)");
+        System.out.println("Cześć " + player.name + "! Miło mi Cię powitać w Twoim nowym komisie samochodowym :-)");
         System.out.println("Nie masz jeszcze żadnych aut, więc na początek polecam Ci jakieś kupić , żeby móc je potem sprzedać z zyskiem. Widzę, że masz $" + (player.getFunds()) + ". To na początek wystarczy." );
+        int tury=0;
 
         //LISTY
-        ArrayList customers = new ArrayList();
-        ArrayList potentionalcustomers = new ArrayList();
+        ArrayList<Customer> customers = new ArrayList<Customer>();
+        ArrayList<Customer> potentionalcustomers = new ArrayList<Customer>();
         ArrayList<Car> cars = new ArrayList<Car>(25);
         ArrayList<Car> ownedcars = new ArrayList<Car>();
+        ArrayList<Mechanic> mechanicy = new ArrayList<Mechanic>();
         ArrayList naprawy = new ArrayList();
         ArrayList transakcje = new ArrayList();
+
+        //MECHANICY
+        Mechanic Janusz = new Mechanic();
+        mechanicy.add(Janusz);
+        mechanicy.set(0, Janusz);
+        Janusz.mechanikcena = 1000;
+        Janusz.mechanikimie = "Janusz";
+        Janusz.mechanikszansa = 100;
+
+        Mechanic Marian = new Mechanic();
+        mechanicy.add(Marian);
+        mechanicy.set(1, Marian);
+
+        Mechanic Adrian = new Mechanic();
+        mechanicy.add(Adrian);
+        mechanicy.set(2, Adrian);
+
         //KLIENCI
         Customer customer1 = new Customer();
         customers.add(customer1);
@@ -55,7 +75,6 @@ public class Main {
         customers.add(customer10);
 
         //SAMOCHODY SAMOUCZKOWE
-
         Car samouczkowy1 = new Car();
         samouczkowy1.setValue(5000);
         samouczkowy1.setMarka("Ford");
@@ -164,7 +183,6 @@ public class Main {
         cars.set(21, car21);
 
         //MENU
-        int tury=0;
         boolean mainLoop = true;
         int choice;
        while(true) {
@@ -186,7 +204,11 @@ public class Main {
            switch (choice){
                case 0:
                    //BAZA SAMOCHODÓW
-                   System.out.println(cars);
+                   System.out.println("1. " + cars.get(0));
+                   System.out.println("2. " + cars.get(1));
+                   System.out.println("3. " + cars.get(2));
+                   System.out.println("4. " + cars.get(3));
+                   System.out.println("5. " + cars.get(4));
                    break;
                case 1:
                    //KUP SAMOCHÓD
@@ -221,42 +243,79 @@ public class Main {
                    int wybor = skaner.nextInt();
                    switch (wybor){
                        case 1:
-                           ownedcars.add(cars.get(0));
-                           player.setFunds(player.getFunds() - cars.get(0).getValue());
-                           System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(0));
-                           cars.remove(0);
-                           break;
+                           if(player.getFunds() >= cars.get(0).getValue() + cars.get(0).getValue() * 2/100) {
+                               ownedcars.add(cars.get(0));
+                               tury += 1;
+                               player.setFunds(player.getFunds() - cars.get(0).getValue() - cars.get(0).getValue() * 2/100);
+                               System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(0));
+                               System.out.println("ZAPŁACIŁEŚ $" + cars.get(0).getValue() * 2/100 + " PODATKU.");
+                               cars.remove(0);
+                               break;
+                           } else {
+                               System.out.println("Nie stać Cię na to auto! ");
+                               break;
+                           }
                        case 2:
-                           ownedcars.add(cars.get(1));
-                           player.setFunds(player.getFunds() - cars.get(1).getValue());
-                           System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(1));
-                           cars.remove(1);
-                           break;
+                           if(player.getFunds() >= cars.get(1).getValue()) {
+                               ownedcars.add(cars.get(1));
+                               tury += 1;
+                               player.setFunds(player.getFunds() - cars.get(1).getValue() - cars.get(1).getValue() * 2/100);
+                               System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(1));
+                               System.out.println("ZAPŁACIŁEŚ $" + cars.get(1).getValue() * 2/100 + " PODATKU.");
+                               cars.remove(1);
+                               break;
+                           } else {
+                               System.out.println("Nie stać Cię na to auto! ");
+                               break;
+                           }
                        case 3:
-                           ownedcars.add(cars.get(2));
-                           player.setFunds(player.getFunds() - cars.get(2).getValue());
-                           System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(2));
-                           cars.remove(2);
-                           break;
+                           if(player.getFunds() >= cars.get(2).getValue()) {
+                               ownedcars.add(cars.get(2));
+                               tury += 1;
+                               player.setFunds(player.getFunds() - cars.get(2).getValue() - cars.get(2).getValue() * 2/100);
+                               System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(2));
+                               System.out.println("ZAPŁACIŁEŚ $" + cars.get(2).getValue() * 2/100 + " PODATKU.");
+                               cars.remove(2);
+                               break;
+                           } else {
+                               System.out.println("Nie stać Cie na to auto! ");
+                               break;
+                           }
                        case 4:
-                           ownedcars.add(cars.get(3));
-                           player.setFunds(player.getFunds() - cars.get(3).getValue());
-                           System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(3));
-                           cars.remove(3);
-                           break;
+                           if (player.getFunds() >= cars.get(3).getValue()) {
+                               ownedcars.add(cars.get(3));
+                               tury += 1;
+                               player.setFunds(player.getFunds() - cars.get(3).getValue() - cars.get(3).getValue() * 2/100);
+                               System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(3));
+                               System.out.println("ZAPŁACIŁEŚ $" + cars.get(3).getValue() * 2/100 + " PODATKU.");
+                               cars.remove(3);
+                               break;
+                           } else {
+                               System.out.println("Nie stać Cie na to auto! ");
+                               break;
+                           }
                        case 5:
-                           ownedcars.add(cars.get(4));
-                           player.setFunds(player.getFunds() - cars.get(4).getValue());
-                           System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(4));
-                           cars.remove(4);
-                           break;
+                           if (player.getFunds() >= cars.get(4).getValue()) {
+                               ownedcars.add(cars.get(4));
+                               tury += 1;
+                               player.setFunds(player.getFunds() - cars.get(4).getValue() - cars.get(4).getValue() * 2/100);
+                               System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(4));
+                               System.out.println("ZAPŁACIŁEŚ $" + cars.get(4).getValue() * 2/100 + " PODATKU.");
+                               cars.remove(4);
+                           } else {
+                               System.out.println("Nie stać Cie na to auto! ");
+                               break;
+                           }
                    }
-                   break;
                case 2:
                    //POSIADANE SAMOCHODY
-                   System.out.println("TWOJE SAMOCHODY:");
-                   System.out.println(ownedcars);
-                   break;
+                   if(ownedcars.size() == 0){
+                       System.out.println("Nie masz żadnych samochodów.");
+                       break;
+                   } else {
+                       System.out.println("TWOJE SAMOCHODY: " + "\r\n" + ownedcars);
+                       break;
+                   }
                case 3:
                    //NAPRAW SAMOCHÓD
                    break;
@@ -264,16 +323,49 @@ public class Main {
                    //KLIENCI
                    System.out.println(potentionalcustomers);
                    if(potentionalcustomers.size() == 0){
-                       System.out.println("Nie masz żadnych klientów. Kup reklamę, aby ich pozyskać");
+                       System.out.println("Nie masz żadnych klientów. Kup reklamę, aby ich pozyskać.");
                    }
                    break;
                case 5:
                    //SPRZEDAJ SAMOCHÓD
+                  if(ownedcars.size() == 0){
+                      System.out.println("Nie masz żadnych aut na sprzedania");
+                  } else if(ownedcars.size() > 0){
+                      for(int i = 0; i < ownedcars.size(); i++) {
+                          System.out.println(i+1 + ". " + ownedcars.get(i));
+                      }
+                      System.out.println("KTÓRY SAMOCHÓD CHCESZ SPRZEDAĆ?");
+                      int wyborauto = skaner.nextInt();
+                      System.out.println(ownedcars.get(wyborauto - 1));
+                      System.out.println("\r\n" + "WYBIERZ KLIENTA NA TO AUTO: ");
+                      for(int i = 0; i < potentionalcustomers.size(); i++) {
+                          System.out.println(i+1 + "." + potentionalcustomers.get(i));
+                      }
+                      int wyborklient = skaner.nextInt();
+                      if(ownedcars.get(wyborauto-1).getMarka() == potentionalcustomers.get(wyborklient - 1).getCustomerFavoruite1() || ownedcars.get(wyborauto - 1).getMarka() == potentionalcustomers.get(wyborklient - 1).getCustomerFavoruite2()){
+                          if(ownedcars.get(wyborauto - 1).getValue() < potentionalcustomers.get(wyborklient - 1).getCustomerMoney()) {
+                              System.out.println("Sprzedano " + ownedcars.get(wyborauto - 1).getMarka() + " za $" + ownedcars.get(wyborauto - 1).getValue() + "\r\n" + ". PODATEK: " + ownedcars.get(wyborauto - 1).getValue() * 2 / 100);
+                              player.setFunds(player.getFunds() - (ownedcars.get(wyborauto - 1).getValue() + ownedcars.get(wyborauto - 1).getValue() * 2 / 100));
+                              int czyszczenie = 0;
+                              System.out.println("CZYSZCZENIE: $150" );
+                              player.setFunds(player.getFunds() - 150);
+                              czyszczenie += 1;
+                              ownedcars.remove(wyborauto - 1);
+                              potentionalcustomers.remove(wyborklient - 1);
+                          } else if (ownedcars.get(wyborauto - 1).getValue() > potentionalcustomers.get(wyborklient - 1).getCustomerMoney()) {
+                              System.out.println("Klient nie dysponuje wystarczającą ilością gotówki.");
+                          }
+                      }
+                          else {
+                          System.out.println("Klient nie jest zainteresowany oferowaną przez Ciebie marką.");
+                      }
+
+                  }
                    break;
                case 6:
                    //KUP REKLAMĘ
                    System.out.println("1. KUP REKLAMĘ W INTERNECIE ZA $500");
-                   System.out.println("2. KUP REKLAMĘ W GAZECIE ZA $1500");
+                   System.out.println("2. KUP REKLAMĘ W GAZECIE ZA $800");
                    System.out.println("3. ROZMYŚLIŁEM SIĘ...");
                    int wybor1 = skaner.nextInt();
                    switch (wybor1){
@@ -281,25 +373,25 @@ public class Main {
                            potentionalcustomers.add(customers.get(0));
                            customers.remove(0);
                            player.setFunds(player.getFunds() - 500);
-                           System.out.println("Pozyskałeś jednego nowego klienta");
+                           System.out.println("Pozyskałeś jednego nowego klienta.");
                            break;
                        case 2:
                            int losowanie = random.nextInt(3);
                            if(losowanie == 0){
-                               System.out.println("Reklama nie przyniosła żadnych rezultatów");
-                               player.setFunds(player.getFunds() - 1500);
+                               System.out.println("Reklama nie przyniosła żadnych rezultatów.");
+                               player.setFunds(player.getFunds() - 800);
                            }else if (losowanie == 1){
                                potentionalcustomers.add(customers.get(0));
                                customers.remove(0);
-                               System.out.println("Pozyskałeś jednego nowego klienta");
-                               player.setFunds(player.getFunds() - 1500);
+                               System.out.println("Pozyskałeś jednego nowego klienta.");
+                               player.setFunds(player.getFunds() - 800);
                            } else {
                                potentionalcustomers.add(customers.get(0));
                                customers.remove(0);
                                potentionalcustomers.add(customers.get(0));
                                customers.remove(0);
-                               System.out.println("Pozyskałeś dwóch nowych klientów");
-                               player.setFunds(player.getFunds() - 1500);
+                               System.out.println("Pozyskałeś dwóch nowych klientów!");
+                               player.setFunds(player.getFunds() - 800);
                            }
                         break;
                        case 3:
@@ -309,6 +401,7 @@ public class Main {
                case 7:
                    System.out.println("Twój stan konta to: ");
                    System.out.println("$" + player.getFunds());
+                   System.out.println(tury);
                    break;
                case 8:
                    //HISTORIA TRANSAKCJI
