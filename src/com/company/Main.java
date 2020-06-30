@@ -96,6 +96,42 @@ public class Main {
         Customer customer10 = new Customer();
         customers.add(customer10);
 
+        Customer customer11 = new Customer();
+        customers.add(customer11);
+
+        Customer customer12 = new Customer();
+        customers.add(customer12);
+
+        Customer customer13 = new Customer();
+        customers.add(customer13);
+
+        Customer customer14 = new Customer();
+        customers.add(customer14);
+
+        Customer customer15 = new Customer();
+        customers.add(customer15);
+
+        Customer customer16 = new Customer();
+        customers.add(customer16);
+
+        Customer customer17 = new Customer();
+        customers.add(customer17);
+
+        Customer customer18 = new Customer();
+        customers.add(customer18);
+
+        Customer customer19 = new Customer();
+        customers.add(customer19);
+
+        Customer customer20 = new Customer();
+        customers.add(customer20);
+
+        //KLIENCI SAMOUCZKOWI
+        potentionalcustomers.add(customers.get(0));
+        customers.remove(0);
+        potentionalcustomers.add(customers.get(0));
+        customers.remove(0);
+
         //SAMOCHODY SAMOUCZKOWE
         Car samouczkowy1 = new Car();
         samouczkowy1.setValue(5000);
