@@ -9,14 +9,26 @@ public class Car {
         String segment = "SEGMENT: " + getSegment();
         String value = "CENA: " + "$" + getValue();
         String km = "PRZEBIEG: " + przebieg + "KM";
-        String rhyme = "\r\n" + marka + "\r\n" + kolor + "\r\n" + segment + "\r\n" + value + "\r\n" + km + "\r\n";
-        return rhyme;
+        String rhyme = "\r\n" + marka + "\r\n" + kolor + "\r\n" + segment + "\r\n" + value + "\r\n" + km;
+        String rhyme2 = "\r\n" + shamulce + "\r\n" + szawieszenie + "\r\n" + ssilnik + "\r\n" + skaroseria + "\r\n" + getSskrzynia() + "\r\n";
+        return rhyme + "\r\n" + rhyme2;
     }
     private int przebieg;
     private double value;
     private String marka;
     private String segment;
     private String color;
+    private String shamulce;
+    private String szawieszenie;
+    private String ssilnik;
+    private String skaroseria;
+    private String sskrzynia;
+    private boolean hamulce;
+    private boolean zawieszenie;
+    private boolean silnik;
+    private boolean karoseria;
+    private boolean skrzynia;
+    private boolean sprawny;
     public String lista_marka[] = {"Fiat" , "Ford" , "BMW", "Audi", "Mercedes", "Tesla"   };
     public String lista_color[] = {"Czarny", "Biały", "Szary", "Czerwony", "Niebieski"};
     public String lista_segment[] = {"Budget", "Standard", "Premium"};
@@ -63,10 +75,45 @@ public class Car {
 
             }
 
-
-
-
-
+            int sprawnosclosowanie = random.nextInt(5);
+            if(sprawnosclosowanie == 0){
+                setHamulce(false);
+                shamulce = "HAMULCE: Zepsute";
+            } else {
+                setHamulce(true);
+                shamulce = "HAMULCE: Sprawne";
+            }
+            if(sprawnosclosowanie == 1){
+                setZawieszenie(false);
+                szawieszenie = "ZAWIESZENIE: W złym stanie";
+            } else {
+                setZawieszenie(true);
+                szawieszenie = "ZAWIESZENIE: W dobrym stanie";
+            }
+            if(sprawnosclosowanie == 2){
+                setSilnik(false);
+                ssilnik = "SILNIK: Zepsuty";
+            } else {
+                setSilnik(true);
+                ssilnik = "SILNIK: Sprawny";
+            }
+            if(sprawnosclosowanie == 3){
+                setKaroseria(false);
+                skaroseria = "KAROSERIA: W złym stanie";
+            } else {
+                setKaroseria(true);
+                skaroseria = "KAROSERIA: W dobrym stanie";
+            }
+            if(sprawnosclosowanie == 4){
+                setSkrzynia(false);
+                setSskrzynia("SKRZYNIE BIEGÓW: Zepsuta");
+            } else {
+                setSkrzynia(true);
+                setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
+            }
+            if(hamulce == true && zawieszenie == true && silnik == true && karoseria == true && skrzynia == true){
+                setSprawny(true);
+            }
         }
 
 
@@ -101,5 +148,93 @@ public class Car {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public boolean isHamulce() {
+        return hamulce;
+    }
+
+    public void setHamulce(boolean hamulce) {
+        this.hamulce = hamulce;
+    }
+
+    public boolean isZawieszenie() {
+        return zawieszenie;
+    }
+
+    public void setZawieszenie(boolean zawieszenie) {
+        this.zawieszenie = zawieszenie;
+    }
+
+    public boolean isSilnik() {
+        return silnik;
+    }
+
+    public void setSilnik(boolean silnik) {
+        this.silnik = silnik;
+    }
+
+    public boolean isKaroseria() {
+        return karoseria;
+    }
+
+    public void setKaroseria(boolean karoseria) {
+        this.karoseria = karoseria;
+    }
+
+    public boolean isSkrzynia() {
+        return skrzynia;
+    }
+
+    public void setSkrzynia(boolean skrzynia) {
+        this.skrzynia = skrzynia;
+    }
+
+    public boolean isSprawny() {
+        return sprawny;
+    }
+
+    public void setSprawny(boolean sprawny) {
+        this.sprawny = sprawny;
+    }
+
+    public String getShamulce() {
+        return shamulce;
+    }
+
+    public void setShamulce(String shamulce) {
+        this.shamulce = shamulce;
+    }
+
+    public String getSzawieszenie() {
+        return szawieszenie;
+    }
+
+    public void setSzawieszenie(String szawieszenie) {
+        this.szawieszenie = szawieszenie;
+    }
+
+    public String getSsilnik() {
+        return ssilnik;
+    }
+
+    public void setSsilnik(String ssilnik) {
+        this.ssilnik = ssilnik;
+    }
+
+    public String getSkaroseria() {
+        return skaroseria;
+    }
+
+    public void setSkaroseria(String skaroseria) {
+        this.skaroseria = skaroseria;
+    }
+
+    public String getSskrzynia() {
+        return sskrzynia;
+    }
+
+    public void setSskrzynia(String sskrzynia) {
+        this.sskrzynia = sskrzynia;
     }
 }

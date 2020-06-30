@@ -1,6 +1,5 @@
 package com.company;
 
-import java.lang.reflect.Array;
 import java.sql.SQLOutput;
 import java.util.*;
 
@@ -16,7 +15,9 @@ public class Main {
         player.name = skaner.nextLine();
         System.out.println("Cześć " + player.name + "! Miło mi Cię powitać w Twoim nowym komisie samochodowym :-)");
         System.out.println("Nie masz jeszcze żadnych aut, więc na początek polecam Ci jakieś kupić , żeby móc je potem sprzedać z zyskiem. Widzę, że masz $" + (player.getFunds()) + ". To na początek wystarczy." );
-        int tury=0;
+        int ruchy=0;
+        int czyszczenie = 0;
+        int koszty = 0;
 
         //LISTY
         ArrayList<Customer> customers = new ArrayList<Customer>();
@@ -25,23 +26,44 @@ public class Main {
         ArrayList<Car> ownedcars = new ArrayList<Car>();
         ArrayList<Mechanic> mechanicy = new ArrayList<Mechanic>();
         ArrayList naprawy = new ArrayList();
-        ArrayList transakcje = new ArrayList();
+        ArrayList<Car> transakcje = new ArrayList<Car>();
 
         //MECHANICY
         Mechanic Janusz = new Mechanic();
         mechanicy.add(Janusz);
         mechanicy.set(0, Janusz);
-        Janusz.mechanikcena = 1000;
-        Janusz.mechanikimie = "Janusz";
+        Janusz.mechanikcenahamulce = 800;
+        Janusz.mechanikcenazawieszenie = 900;
+        Janusz.mechanikcenasilnik = 1000;
+        Janusz.mechanikcenakaroseria = 700;
+        Janusz.mechanikcenaskrzynia = 700;
+        Janusz.mechanikimie = "JANUSZ";
         Janusz.mechanikszansa = 100;
+        Janusz.mechanikbreak = 0;
 
         Mechanic Marian = new Mechanic();
         mechanicy.add(Marian);
         mechanicy.set(1, Marian);
+        Marian.mechanikcenahamulce = 600;
+        Marian.mechanikcenazawieszenie = 800;
+        Marian.mechanikcenasilnik = 900;
+        Marian.mechanikcenakaroseria = 600;
+        Marian.mechanikcenaskrzynia = 600;
+        Marian.mechanikimie = "MARIAN";
+        Marian.mechanikszansa = 90;
+        Marian.mechanikbreak = 0;
 
         Mechanic Adrian = new Mechanic();
         mechanicy.add(Adrian);
         mechanicy.set(2, Adrian);
+        Adrian.mechanikcenahamulce = 500;
+        Adrian.mechanikcenazawieszenie = 700;
+        Adrian.mechanikcenasilnik = 750;
+        Adrian.mechanikcenakaroseria = 450;
+        Adrian.mechanikcenaskrzynia = 500;
+        Adrian.mechanikimie = "ADRIAN";
+        Adrian.mechanikszansa = 80;
+        Adrian.mechanikbreak = 2;
 
         //KLIENCI
         Customer customer1 = new Customer();
@@ -196,7 +218,7 @@ public class Main {
            System.out.println("7. STAN KONTA");
            System.out.println("8. HISTORIA TRANSAKCJI");
            System.out.println("9. HISTORIA NAPRAW");
-           System.out.println("10. SUMA KOSZTÓW NAPRAW I MYCIA DLA KAŻDEGO Z POSIADANYCH POJAZDÓW");
+           System.out.println("10. SUMA KOSZTÓW NAPRAW I MYCIA TWOICH POJAZDÓW");
 
            choice = skaner.nextInt();
 
@@ -218,6 +240,7 @@ public class Main {
                    System.out.println("3. " + cars.get(2));
                    System.out.println("4. " + cars.get(3));
                    System.out.println("5. " + cars.get(4));
+                   System.out.println("6. POWRÓT DO MENU");
                    /*
                    System.out.println("6. " + cars.get(5));
                    System.out.println("7. " + cars.get(6));
@@ -245,7 +268,7 @@ public class Main {
                        case 1:
                            if(player.getFunds() >= cars.get(0).getValue() + cars.get(0).getValue() * 2/100) {
                                ownedcars.add(cars.get(0));
-                               tury += 1;
+                               ruchy += 1;
                                player.setFunds(player.getFunds() - cars.get(0).getValue() - cars.get(0).getValue() * 2/100);
                                System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(0));
                                System.out.println("ZAPŁACIŁEŚ $" + cars.get(0).getValue() * 2/100 + " PODATKU.");
@@ -258,7 +281,7 @@ public class Main {
                        case 2:
                            if(player.getFunds() >= cars.get(1).getValue()) {
                                ownedcars.add(cars.get(1));
-                               tury += 1;
+                               ruchy += 1;
                                player.setFunds(player.getFunds() - cars.get(1).getValue() - cars.get(1).getValue() * 2/100);
                                System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(1));
                                System.out.println("ZAPŁACIŁEŚ $" + cars.get(1).getValue() * 2/100 + " PODATKU.");
@@ -271,7 +294,7 @@ public class Main {
                        case 3:
                            if(player.getFunds() >= cars.get(2).getValue()) {
                                ownedcars.add(cars.get(2));
-                               tury += 1;
+                               ruchy += 1;
                                player.setFunds(player.getFunds() - cars.get(2).getValue() - cars.get(2).getValue() * 2/100);
                                System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(2));
                                System.out.println("ZAPŁACIŁEŚ $" + cars.get(2).getValue() * 2/100 + " PODATKU.");
@@ -284,7 +307,7 @@ public class Main {
                        case 4:
                            if (player.getFunds() >= cars.get(3).getValue()) {
                                ownedcars.add(cars.get(3));
-                               tury += 1;
+                               ruchy += 1;
                                player.setFunds(player.getFunds() - cars.get(3).getValue() - cars.get(3).getValue() * 2/100);
                                System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(3));
                                System.out.println("ZAPŁACIŁEŚ $" + cars.get(3).getValue() * 2/100 + " PODATKU.");
@@ -297,7 +320,7 @@ public class Main {
                        case 5:
                            if (player.getFunds() >= cars.get(4).getValue()) {
                                ownedcars.add(cars.get(4));
-                               tury += 1;
+                               ruchy += 1;
                                player.setFunds(player.getFunds() - cars.get(4).getValue() - cars.get(4).getValue() * 2/100);
                                System.out.println("KUPIŁEŚ: " + "\r\n" + cars.get(4));
                                System.out.println("ZAPŁACIŁEŚ $" + cars.get(4).getValue() * 2/100 + " PODATKU.");
@@ -306,6 +329,8 @@ public class Main {
                                System.out.println("Nie stać Cie na to auto! ");
                                break;
                            }
+                       case 6:
+                           break;
                    }
                case 2:
                    //POSIADANE SAMOCHODY
@@ -318,18 +343,274 @@ public class Main {
                    }
                case 3:
                    //NAPRAW SAMOCHÓD
+                   if(ownedcars.size() == 0){
+                       System.out.println("Nie masz żadnych samochodów.");
+                   } else {
+                       System.out.println("\r\n" + "KTÓRY SAMOCHÓD CHCESZ NAPRAWIĆ?");
+                       for(int nr = 0; nr < ownedcars.size(); nr++) {
+                           System.out.println(nr + 1 + "." + ownedcars.get(nr) + "\r\n");
+                       }
+                       int wyborautonaprawa = skaner.nextInt();
+                       System.out.println("Któremy mechanikowi chcesz zlecić naprawę?");
+                       System.out.println("1. " + Janusz + "\r\n");
+                       System.out.println("2." + Marian + "\r\n");
+                       System.out.println("3. " + Adrian + "\r\n");
+                       int wybormechanik = skaner.nextInt();
+                           if (ownedcars.get(wyborautonaprawa - 1).isSprawny() == true){
+                               System.out.println("To auto jest w pełni sprawne" + "\r\n");
+                           } else {
+                               System.out.println(ownedcars.get(wyborautonaprawa - 1));
+                               System.out.println("CO CHCESZ NAPRAWIĆ?");
+                               System.out.println("1. Hamulce");
+                               System.out.println("2. Zawieszenie");
+                               System.out.println("3. Silnik");
+                               System.out.println("4. Karoseria");
+                               System.out.println("5. Skrzynia biegów");
+                               int wybornaprawa = skaner.nextInt();
+                               if (wybornaprawa == 1){
+                                   if(ownedcars.get(wyborautonaprawa - 1).isHamulce() == true) {
+                                       System.out.println("Hamulce w tym aucie są sprawne.");
+                                       break;
+                                   }
+                                   if(ownedcars.get(wyborautonaprawa - 1).isHamulce() == false){
+                                       if(wybormechanik == 1){
+                                           player.setFunds(player.getFunds() - Janusz.mechanikcenahamulce);
+                                           ownedcars.get(wyborautonaprawa - 1).setHamulce(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Janusz.mechanikcenahamulce;
+                                           ruchy += 1;
+                                           System.out.println("Hamulce zostały naprawione.");
+                                           break;
+                                       }
+                                       if(wybormechanik == 2){
+                                           player.setFunds(player.getFunds() - Marian.mechanikcenahamulce);
+                                           ownedcars.get(wyborautonaprawa - 1).setHamulce(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Marian.mechanikcenahamulce;
+                                           ruchy += 1;
+                                           System.out.println("Hamulce zostały naprawione.");
+                                           break;
+                                       }
+                                       if(wybormechanik == 3){
+                                           player.setFunds(player.getFunds() - Adrian.mechanikcenahamulce);
+                                           ownedcars.get(wyborautonaprawa - 1).setHamulce(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Adrian.mechanikcenahamulce;
+                                           ruchy += 1;
+                                           System.out.println("Hamulce zostały naprawione.");
+                                           break;
+                                       }
+                                   }
+
+                               }
+                               if(wybornaprawa == 2){
+                                   if(ownedcars.get(wyborautonaprawa - 1).isZawieszenie() == true) {
+                                       System.out.println("Zawieszenie nie wymaga naprawy");
+                                       break;
+                                   }
+                                   if(ownedcars.get(wyborautonaprawa - 1).isZawieszenie() == false){
+                                       if(wybormechanik == 1){
+                                           player.setFunds(player.getFunds() - Janusz.mechanikcenazawieszenie);
+                                           ownedcars.get(wyborautonaprawa - 1).setZawieszenie(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Janusz.mechanikcenazawieszenie;
+                                           ruchy += 1;
+                                           System.out.println("Zawieszenie zostało naprawione.");
+                                           break;
+                                       }
+                                       if(wybormechanik == 2){
+                                           player.setFunds(player.getFunds() - Marian.mechanikcenazawieszenie);
+                                           ownedcars.get(wyborautonaprawa - 1).setZawieszenie(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Marian.mechanikcenazawieszenie;
+                                           ruchy += 1;
+                                           System.out.println("Zawieszenie zostało naprawione.");
+                                           break;
+                                       }
+                                       if(wybormechanik == 3){
+                                           player.setFunds(player.getFunds() - Adrian.mechanikcenazawieszenie);
+                                           ownedcars.get(wyborautonaprawa - 1).setZawieszenie(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Adrian.mechanikcenazawieszenie;
+                                           ruchy += 1;
+                                           System.out.println("Zawieszenie zostało naprawione.");
+                                           break;
+                                       }
+                                   }
+
+                               }
+                               if(wybornaprawa == 3){
+                                   if(ownedcars.get(wyborautonaprawa - 1).isSilnik() == true) {
+                                       System.out.println("Silnik jest sprawny.");
+                                       break;
+                                   }
+                                   if(ownedcars.get(wyborautonaprawa - 1).isSilnik() == false){
+                                       if(wybormechanik == 1){
+                                           player.setFunds(player.getFunds() - Janusz.mechanikcenasilnik);
+                                           ownedcars.get(wyborautonaprawa - 1).setSilnik(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Janusz.mechanikcenasilnik;
+                                           ruchy += 1;
+                                           System.out.println("Silnik został naprawiony.");
+                                           break;
+                                       }
+                                       if(wybormechanik == 2){
+                                           player.setFunds(player.getFunds() - Marian.mechanikcenasilnik);
+                                           ownedcars.get(wyborautonaprawa - 1).setSilnik(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Marian.mechanikcenasilnik;
+                                           ruchy += 1;
+                                           System.out.println("Silnik został naprawiony.");
+                                           break;
+                                       }
+                                       if(wybormechanik == 3){
+                                           player.setFunds(player.getFunds() - Adrian.mechanikcenasilnik);
+                                           ownedcars.get(wyborautonaprawa - 1).setSilnik(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Adrian.mechanikcenasilnik;
+                                           ruchy += 1;
+                                           System.out.println("Silnik został naprawiony.");
+                                           break;
+                                       }
+                                   }
+
+                               }
+                               if(wybornaprawa == 4){
+                                   if(ownedcars.get(wyborautonaprawa - 1).isKaroseria() == true) {
+                                       System.out.println("Karoseria jest w dobrym stanie.");
+                                       break;
+                                   }
+                                   if(ownedcars.get(wyborautonaprawa - 1).isKaroseria() == false){
+                                       if(wybormechanik == 1){
+                                           player.setFunds(player.getFunds() - Janusz.mechanikcenakaroseria);
+                                           ownedcars.get(wyborautonaprawa - 1).setKaroseria(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Janusz.mechanikcenakaroseria;
+                                           ruchy += 1;
+                                           System.out.println("Karoseria została naprawiona.");
+                                           break;
+                                       }
+                                       if(wybormechanik == 2){
+                                           player.setFunds(player.getFunds() - Marian.mechanikcenakaroseria);
+                                           ownedcars.get(wyborautonaprawa - 1).setKaroseria(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Marian.mechanikcenakaroseria;
+                                           ruchy += 1;
+                                           System.out.println("Karoseria została naprawiona.");
+                                           break;
+                                       }
+                                       if(wybormechanik == 3){
+                                           player.setFunds(player.getFunds() - Adrian.mechanikcenakaroseria);
+                                           ownedcars.get(wyborautonaprawa - 1).setKaroseria(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Adrian.mechanikcenakaroseria;
+                                           ruchy += 1;
+                                           System.out.println("Karoseria została naprawiona.");
+                                           break;
+                                       }
+                                   }
+
+                               }
+                               if(wybornaprawa == 5){
+                                   if(ownedcars.get(wyborautonaprawa - 1).isSkrzynia() == true) {
+                                       System.out.println("Skrzynia biegów nie wymaga naprawy.");
+                                       break;
+                                   }
+                                   if(ownedcars.get(wyborautonaprawa - 1).isSkrzynia() == false){
+                                       if(wybormechanik == 1){
+                                           player.setFunds(player.getFunds() - Janusz.mechanikcenaskrzynia);
+                                           ownedcars.get(wyborautonaprawa - 1).setSkrzynia(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Janusz.mechanikcenakaroseria;
+                                           ruchy += 1;
+                                           System.out.println("Skrzynia biegów została naprawiona.");
+                                           break;
+                                       }
+                                       if(wybormechanik == 2){
+                                           player.setFunds(player.getFunds() - Marian.mechanikcenaskrzynia);
+                                           ownedcars.get(wyborautonaprawa - 1).setSkrzynia(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Marian.mechanikcenakaroseria;
+                                           ruchy += 1;
+                                           System.out.println("Skrzynia biegów została naprawiona");
+                                           break;
+                                       }
+                                       if(wybormechanik == 3){
+                                           player.setFunds(player.getFunds() - Adrian.mechanikcenaskrzynia);
+                                           ownedcars.get(wyborautonaprawa - 1).setSkrzynia(true);
+                                           ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
+                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
+                                           naprawy.add(wyborautonaprawa - 1);
+                                           koszty += Adrian.mechanikcenakaroseria;
+                                           ruchy += 1;
+                                           System.out.println("Skrzynia biegów została naprawiona");
+                                           break;
+                                       }
+                                   }
+
+                               }
+                           }
+
+                   }
                    break;
                case 4:
                    //KLIENCI
                    System.out.println(potentionalcustomers);
                    if(potentionalcustomers.size() == 0){
                        System.out.println("Nie masz żadnych klientów. Kup reklamę, aby ich pozyskać.");
+                       break;
                    }
                    break;
                case 5:
                    //SPRZEDAJ SAMOCHÓD
                   if(ownedcars.size() == 0){
-                      System.out.println("Nie masz żadnych aut na sprzedania");
+                      System.out.println("Nie masz żadnych aut na sprzedania.");
+                  if(potentionalcustomers.size() == 0){
+                      System.out.println("Nie masz klientów.");
+                  }
                   } else if(ownedcars.size() > 0){
                       for(int i = 0; i < ownedcars.size(); i++) {
                           System.out.println(i+1 + ". " + ownedcars.get(i));
@@ -344,14 +625,21 @@ public class Main {
                       int wyborklient = skaner.nextInt();
                       if(ownedcars.get(wyborauto-1).getMarka() == potentionalcustomers.get(wyborklient - 1).getCustomerFavoruite1() || ownedcars.get(wyborauto - 1).getMarka() == potentionalcustomers.get(wyborklient - 1).getCustomerFavoruite2()){
                           if(ownedcars.get(wyborauto - 1).getValue() < potentionalcustomers.get(wyborklient - 1).getCustomerMoney()) {
-                              System.out.println("Sprzedano " + ownedcars.get(wyborauto - 1).getMarka() + " za $" + ownedcars.get(wyborauto - 1).getValue() + "\r\n" + ". PODATEK: " + ownedcars.get(wyborauto - 1).getValue() * 2 / 100);
-                              player.setFunds(player.getFunds() - (ownedcars.get(wyborauto - 1).getValue() + ownedcars.get(wyborauto - 1).getValue() * 2 / 100));
-                              int czyszczenie = 0;
+                              System.out.println("Sprzedano " + ownedcars.get(wyborauto - 1).getMarka() + " za $" + ownedcars.get(wyborauto - 1).getValue() + "." + "\r\n" + "PODATEK: $" + ownedcars.get(wyborauto - 1).getValue() * 2 / 100);
+                              player.setFunds(player.getFunds() - (ownedcars.get(wyborauto - 1).getValue() * 2 / 100));
+                              ruchy += 1;
                               System.out.println("CZYSZCZENIE: $150" );
                               player.setFunds(player.getFunds() - 150);
+                              player.setFunds(player.getFunds() + ownedcars.get(wyborauto -1).getValue());
                               czyszczenie += 1;
+                              transakcje.add(ownedcars.get(wyborauto -1));
                               ownedcars.remove(wyborauto - 1);
                               potentionalcustomers.remove(wyborklient - 1);
+                              potentionalcustomers.add(customers.get(0));
+                              customers.remove(0);
+                              potentionalcustomers.add(customers.get(0));
+                              customers.remove(0);
+                              System.out.println("Dzięki tej sprzedaży pozyskałeś dwóch nowych klientów");
                           } else if (ownedcars.get(wyborauto - 1).getValue() > potentionalcustomers.get(wyborklient - 1).getCustomerMoney()) {
                               System.out.println("Klient nie dysponuje wystarczającą ilością gotówki.");
                           }
@@ -370,12 +658,14 @@ public class Main {
                    int wybor1 = skaner.nextInt();
                    switch (wybor1){
                        case 1:
+                           ruchy += 1;
                            potentionalcustomers.add(customers.get(0));
                            customers.remove(0);
                            player.setFunds(player.getFunds() - 500);
                            System.out.println("Pozyskałeś jednego nowego klienta.");
                            break;
                        case 2:
+                           ruchy += 1;
                            int losowanie = random.nextInt(3);
                            if(losowanie == 0){
                                System.out.println("Reklama nie przyniosła żadnych rezultatów.");
@@ -399,31 +689,32 @@ public class Main {
                    }
                    //STAN KONTA
                case 7:
-                   System.out.println("Twój stan konta to: ");
-                   System.out.println("$" + player.getFunds());
-                   System.out.println(tury);
+                   System.out.println("Twój stan konta to: " + "\r\n" + "$" + player.getFunds());
                    break;
                case 8:
                    //HISTORIA TRANSAKCJI
+                   System.out.println("Samochody które sprzedałeś:" + "\r\n" + transakcje);
                    break;
                case 9:
                    //HISTORIA NAPRAW
+                   System.out.println(naprawy);
                    break;
                case 10:
-                   //SUMA KOSZTÓW NAPRAW I MYCIA DLA KAŻDEGO Z POSIADANYCH POJAZDÓW
+                   //SUMA KOSZTÓW NAPRAW I MYCIA POJAZDÓW
+                   System.out.println("Na czyszczenie aut wydałeś łącznie: $" + (czyszczenie * 150));
+                   System.out.println("Na naprawę aut wydałeś łącznie: $" + koszty);
+                   System.out.println("Koszty prowadzenia działalności do tej port: $" + (koszty + czyszczenie * 150));
                    break;
                default:
                    System.out.println("Błędna komenda! Wpisz numer akcji którą chcesz wykonać.");
                    break;
            }
+           if (player.getFunds() >= 40000){
+               System.out.println("WYGRAŁEŚ!!!" + "\r\n" + "GRATULACJE!!!" + "\r\n" + "ILOŚĆ RUCHÓW: " + ruchy );
+           }
 
 
 
        }
-
-
-
-
     }
-
 }
