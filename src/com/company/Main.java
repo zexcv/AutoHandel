@@ -372,7 +372,7 @@ public class Main {
                                        System.out.println("Hamulce w tym aucie są sprawne.");
                                        break;
                                    }
-                                   if(ownedcars.get(wyborautonaprawa - 1).isHamulce() == false){
+                                   if(ownedcars.get(wyborautonaprawa - 1).isHamulce() == false) {
                                        if(wybormechanik == 1){
                                            player.setFunds(player.getFunds() - Janusz.mechanikcenahamulce);
                                            ownedcars.get(wyborautonaprawa - 1).setHamulce(true);
@@ -386,28 +386,52 @@ public class Main {
                                            break;
                                        }
                                        if(wybormechanik == 2){
-                                           player.setFunds(player.getFunds() - Marian.mechanikcenahamulce);
-                                           ownedcars.get(wyborautonaprawa - 1).setHamulce(true);
-                                           ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
-                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
-                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10/100));
-                                           naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Marian.mechanikcenahamulce;
-                                           ruchy += 1;
-                                           System.out.println("Hamulce zostały naprawione.");
-                                           break;
+                                           int szansa = random.nextInt(10);
+                                           if(szansa == 1){
+                                               ownedcars.get(wyborautonaprawa - 1).setHamulce(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
+                                               System.out.println("Marian nie podołał naprawie i musiał poprosić o pomoc Janusza.");
+                                               System.out.println("Zapłaciłeś: $" + Janusz.mechanikcenahamulce);
+                                               player.setFunds(player.getFunds() - Janusz.mechanikcenahamulce);
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10 / 100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Marian.mechanikcenahamulce;
+                                               ruchy += 1;
+                                               System.out.println("Hamulce zostały naprawione.");
+                                               break;
+                                           } else {
+
+                                               player.setFunds(player.getFunds() - Marian.mechanikcenahamulce);
+                                               ownedcars.get(wyborautonaprawa - 1).setHamulce(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10 / 100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Marian.mechanikcenahamulce;
+                                               ruchy += 1;
+                                               System.out.println("Hamulce zostały naprawione.");
+                                               break;
+                                           }
                                        }
-                                       if(wybormechanik == 3){
-                                           player.setFunds(player.getFunds() - Adrian.mechanikcenahamulce);
-                                           ownedcars.get(wyborautonaprawa - 1).setHamulce(true);
-                                           ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
-                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
-                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10/100));
-                                           naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Adrian.mechanikcenahamulce;
-                                           ruchy += 1;
-                                           System.out.println("Hamulce zostały naprawione.");
-                                           break;
+                                       if(wybormechanik == 3) {
+                                           int szansa = random.nextInt(10);
+                                           if (szansa == 1 || szansa == 8) {
+                                               System.out.println("Naprawa się nie powiodła. Pieniądze przepadły.");
+                                               player.setFunds(player.getFunds() - Adrian.mechanikcenahamulce);
+                                               break;
+                                           } else {
+                                               player.setFunds(player.getFunds() - Adrian.mechanikcenahamulce);
+                                               ownedcars.get(wyborautonaprawa - 1).setHamulce(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10 / 100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Adrian.mechanikcenahamulce;
+                                               ruchy += 1;
+                                               System.out.println("Hamulce zostały naprawione.");
+                                               break;
+                                           }
                                        }
                                    }
 
@@ -431,28 +455,50 @@ public class Main {
                                            break;
                                        }
                                        if(wybormechanik == 2){
-                                           player.setFunds(player.getFunds() - Marian.mechanikcenazawieszenie);
-                                           ownedcars.get(wyborautonaprawa - 1).setZawieszenie(true);
-                                           ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
-                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
-                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20/100));
-                                           naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Marian.mechanikcenazawieszenie;
-                                           ruchy += 1;
-                                           System.out.println("Zawieszenie zostało naprawione.");
-                                           break;
+                                           int szansa = random.nextInt(10);
+                                           if(szansa == 1) {
+                                               System.out.println("Marian nie podołał naprawie i musiał poprosić o pomoc Janusza");
+                                               player.setFunds(player.getFunds() - Janusz.mechanikcenazawieszenie);
+                                               ownedcars.get(wyborautonaprawa - 1).setZawieszenie(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20/100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Janusz.mechanikcenazawieszenie;
+                                               ruchy += 1;
+                                               System.out.println("Zawieszenie zostało naprawione.");
+                                               break;
+                                           } else {
+                                               player.setFunds(player.getFunds() - Marian.mechanikcenazawieszenie);
+                                               ownedcars.get(wyborautonaprawa - 1).setZawieszenie(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20 / 100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Marian.mechanikcenazawieszenie;
+                                               ruchy += 1;
+                                               System.out.println("Zawieszenie zostało naprawione.");
+                                               break;
+                                           }
                                        }
                                        if(wybormechanik == 3){
-                                           player.setFunds(player.getFunds() - Adrian.mechanikcenazawieszenie);
-                                           ownedcars.get(wyborautonaprawa - 1).setZawieszenie(true);
-                                           ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
-                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
-                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20/100));
-                                           naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Adrian.mechanikcenazawieszenie;
-                                           ruchy += 1;
-                                           System.out.println("Zawieszenie zostało naprawione.");
-                                           break;
+                                           int szansa = random.nextInt(10);
+                                           if(szansa == 1 || szansa == 8){
+                                               System.out.println("Naprawa się nie powiodła. Pieniądze przepadły.");
+                                               player.setFunds(player.getFunds() - Adrian.mechanikcenazawieszenie);
+                                               break;
+                                           } else {
+                                               player.setFunds(player.getFunds() - Adrian.mechanikcenazawieszenie);
+                                               ownedcars.get(wyborautonaprawa - 1).setZawieszenie(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20 / 100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Adrian.mechanikcenazawieszenie;
+                                               ruchy += 1;
+                                               System.out.println("Zawieszenie zostało naprawione.");
+                                               break;
+                                           }
                                        }
                                    }
 
@@ -476,28 +522,50 @@ public class Main {
                                            break;
                                        }
                                        if(wybormechanik == 2){
-                                           player.setFunds(player.getFunds() - Marian.mechanikcenasilnik);
-                                           ownedcars.get(wyborautonaprawa - 1).setSilnik(true);
-                                           ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
-                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
-                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100/100));
-                                           naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Marian.mechanikcenasilnik;
-                                           ruchy += 1;
-                                           System.out.println("Silnik został naprawiony.");
-                                           break;
+                                           int szansa = random.nextInt(10);
+                                           if(szansa == 1){
+                                               System.out.println("Marian nie podołał naprawie i musiał poprosić o pomoc Janusza");
+                                               player.setFunds(player.getFunds() - Janusz.mechanikcenasilnik);
+                                               ownedcars.get(wyborautonaprawa - 1).setSilnik(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100/100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Janusz.mechanikcenasilnik;
+                                               ruchy += 1;
+                                               System.out.println("Silnik został naprawiony.");
+                                               break;
+                                           } else {
+                                               player.setFunds(player.getFunds() - Marian.mechanikcenasilnik);
+                                               ownedcars.get(wyborautonaprawa - 1).setSilnik(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100 / 100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Marian.mechanikcenasilnik;
+                                               ruchy += 1;
+                                               System.out.println("Silnik został naprawiony.");
+                                               break;
+                                           }
                                        }
                                        if(wybormechanik == 3){
-                                           player.setFunds(player.getFunds() - Adrian.mechanikcenasilnik);
-                                           ownedcars.get(wyborautonaprawa - 1).setSilnik(true);
-                                           ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
-                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
-                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100/100));
-                                           naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Adrian.mechanikcenasilnik;
-                                           ruchy += 1;
-                                           System.out.println("Silnik został naprawiony.");
-                                           break;
+                                           int szansa = random.nextInt(10);
+                                           if(szansa == 1 || szansa == 8){
+                                               System.out.println("Naprawa nie powiodła się. Pieniądze przepadły");
+                                               player.setFunds(player.getFunds() - Adrian.mechanikcenasilnik);
+                                               break;
+                                           } else {
+                                               player.setFunds(player.getFunds() - Adrian.mechanikcenasilnik);
+                                               ownedcars.get(wyborautonaprawa - 1).setSilnik(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100 / 100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Adrian.mechanikcenasilnik;
+                                               ruchy += 1;
+                                               System.out.println("Silnik został naprawiony.");
+                                               break;
+                                           }
                                        }
                                    }
 
@@ -521,28 +589,50 @@ public class Main {
                                            break;
                                        }
                                        if(wybormechanik == 2){
-                                           player.setFunds(player.getFunds() - Marian.mechanikcenakaroseria);
-                                           ownedcars.get(wyborautonaprawa - 1).setKaroseria(true);
-                                           ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
-                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
-                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
-                                           naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Marian.mechanikcenakaroseria;
-                                           ruchy += 1;
-                                           System.out.println("Karoseria została naprawiona.");
-                                           break;
+                                           int szansa = random.nextInt(10);
+                                           if(szansa == 1){
+                                               System.out.println("Marian nie podołał naprawie i musiał poprosić o pomoc Janusza");
+                                               player.setFunds(player.getFunds() - Janusz.mechanikcenakaroseria);
+                                               ownedcars.get(wyborautonaprawa - 1).setKaroseria(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Janusz.mechanikcenakaroseria;
+                                               ruchy += 1;
+                                               System.out.println("Karoseria została naprawiona.");
+                                               break;
+                                           } else {
+                                               player.setFunds(player.getFunds() - Marian.mechanikcenakaroseria);
+                                               ownedcars.get(wyborautonaprawa - 1).setKaroseria(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50 / 100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Marian.mechanikcenakaroseria;
+                                               ruchy += 1;
+                                               System.out.println("Karoseria została naprawiona.");
+                                               break;
+                                           }
                                        }
                                        if(wybormechanik == 3){
-                                           player.setFunds(player.getFunds() - Adrian.mechanikcenakaroseria);
-                                           ownedcars.get(wyborautonaprawa - 1).setKaroseria(true);
-                                           ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
-                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
-                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
-                                           naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Adrian.mechanikcenakaroseria;
-                                           ruchy += 1;
-                                           System.out.println("Karoseria została naprawiona.");
-                                           break;
+                                           int szansa = random.nextInt(10);
+                                           if(szansa == 1 || szansa == 8){
+                                               System.out.println("Adrian nie podołał naprawie. Pieniądze przepadły");
+                                               player.setFunds(player.getFunds() - Adrian.mechanikcenakaroseria);
+                                               break;
+                                           } else {
+                                               player.setFunds(player.getFunds() - Adrian.mechanikcenakaroseria);
+                                               ownedcars.get(wyborautonaprawa - 1).setKaroseria(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50 / 100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Adrian.mechanikcenakaroseria;
+                                               ruchy += 1;
+                                               System.out.println("Karoseria została naprawiona.");
+                                               break;
+                                           }
                                        }
                                    }
 
@@ -560,31 +650,52 @@ public class Main {
                                            ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                    + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
                                            naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Janusz.mechanikcenakaroseria;
+                                           koszty += Janusz.mechanikcenaskrzynia;
                                            ruchy += 1;
                                            System.out.println("Skrzynia biegów została naprawiona.");
                                            break;
                                        }
                                        if(wybormechanik == 2){
-                                           player.setFunds(player.getFunds() - Marian.mechanikcenaskrzynia);
-                                           ownedcars.get(wyborautonaprawa - 1).setSkrzynia(true);
-                                           ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
-                                           ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
-                                                   + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
-                                           naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Marian.mechanikcenakaroseria;
-                                           ruchy += 1;
-                                           System.out.println("Skrzynia biegów została naprawiona");
-                                           break;
+                                           int szansa = random.nextInt(10);
+                                           if(szansa == 1){
+                                               System.out.println("Marian nie podołał naprawie i musiał prosić o pomoc Janusza");
+                                               player.setFunds(player.getFunds() - Janusz.mechanikcenaskrzynia);
+                                               ownedcars.get(wyborautonaprawa - 1).setSkrzynia(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Janusz.mechanikcenaskrzynia;
+                                               ruchy += 1;
+                                               System.out.println("Skrzynia biegów została naprawiona.");
+                                               break;
+                                           } else {
+                                               player.setFunds(player.getFunds() - Marian.mechanikcenaskrzynia);
+                                               ownedcars.get(wyborautonaprawa - 1).setSkrzynia(true);
+                                               ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
+                                               ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
+                                                       + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50 / 100));
+                                               naprawy.add(wyborautonaprawa - 1);
+                                               koszty += Marian.mechanikcenaskrzynia;
+                                               ruchy += 1;
+                                               System.out.println("Skrzynia biegów została naprawiona");
+                                               break;
+                                           }
                                        }
                                        if(wybormechanik == 3){
+                                           int szansa = random.nextInt(10);
+                                           if(szansa == 1 || szansa == 8){
+                                               System.out.println("Adrian nie podołał naprawie. Pieniądze przepadły.");
+                                               player.setFunds(player.getFunds() - Adrian.mechanikcenaskrzynia);
+                                               break;
+                                           }
                                            player.setFunds(player.getFunds() - Adrian.mechanikcenaskrzynia);
                                            ownedcars.get(wyborautonaprawa - 1).setSkrzynia(true);
                                            ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
                                            ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                    + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
                                            naprawy.add(wyborautonaprawa - 1);
-                                           koszty += Adrian.mechanikcenakaroseria;
+                                           koszty += Adrian.mechanikcenaskrzynia;
                                            ruchy += 1;
                                            System.out.println("Skrzynia biegów została naprawiona");
                                            break;
