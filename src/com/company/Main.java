@@ -25,7 +25,7 @@ public class Main {
         ArrayList<Car> cars = new ArrayList<Car>(25);
         ArrayList<Car> ownedcars = new ArrayList<Car>();
         ArrayList<Mechanic> mechanicy = new ArrayList<Mechanic>();
-        ArrayList naprawy = new ArrayList();
+        ArrayList<Car> naprawy = new ArrayList<Car>();
         ArrayList<Car> transakcje = new ArrayList<Car>();
 
         //MECHANICY
@@ -383,10 +383,14 @@ public class Main {
                        System.out.println("Nie masz żadnych samochodów.");
                    } else {
                        System.out.println("\r\n" + "KTÓRY SAMOCHÓD CHCESZ NAPRAWIĆ?");
+                       System.out.println("\r\n" + "0. POWRÓT DO MENU");
                        for(int nr = 0; nr < ownedcars.size(); nr++) {
                            System.out.println(nr + 1 + "." + ownedcars.get(nr) + "\r\n");
                        }
                        int wyborautonaprawa = skaner.nextInt();
+                       if (wyborautonaprawa == 0){
+                           break;
+                       }
                        System.out.println("Któremy mechanikowi chcesz zlecić naprawę?");
                        System.out.println("1. " + Janusz + "\r\n");
                        System.out.println("2." + Marian + "\r\n");
@@ -415,7 +419,8 @@ public class Main {
                                            ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
                                            ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                    + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10/100));
-                                           naprawy.add(wyborautonaprawa - 1);
+                                           ownedcars.get(wyborautonaprawa - 1).setNaprawa("HAMULCE");
+                                           naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                            koszty += Janusz.mechanikcenahamulce;
                                            ruchy += 1;
                                            System.out.println("Hamulce zostały naprawione.");
@@ -431,7 +436,8 @@ public class Main {
                                                player.setFunds(player.getFunds() - Janusz.mechanikcenahamulce);
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10 / 100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("HAMULCE");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Marian.mechanikcenahamulce;
                                                ruchy += 1;
                                                System.out.println("Hamulce zostały naprawione.");
@@ -443,7 +449,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10 / 100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("HAMULCE");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Marian.mechanikcenahamulce;
                                                ruchy += 1;
                                                System.out.println("Hamulce zostały naprawione.");
@@ -462,7 +469,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setShamulce("HAMULCE: Sprawne");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 10 / 100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("HAMULCE");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Adrian.mechanikcenahamulce;
                                                ruchy += 1;
                                                System.out.println("Hamulce zostały naprawione.");
@@ -470,7 +478,6 @@ public class Main {
                                            }
                                        }
                                    }
-
                                }
                                if(wybornaprawa == 2){
                                    if(ownedcars.get(wyborautonaprawa - 1).isZawieszenie() == true) {
@@ -484,7 +491,8 @@ public class Main {
                                            ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
                                            ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                    + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20/100));
-                                           naprawy.add(wyborautonaprawa - 1);
+                                           ownedcars.get(wyborautonaprawa - 1).setNaprawa("ZAWIESZENIE");
+                                           naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                            koszty += Janusz.mechanikcenazawieszenie;
                                            ruchy += 1;
                                            System.out.println("Zawieszenie zostało naprawione.");
@@ -499,7 +507,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20/100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("ZAWIESZENIE");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Janusz.mechanikcenazawieszenie;
                                                ruchy += 1;
                                                System.out.println("Zawieszenie zostało naprawione.");
@@ -510,7 +519,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20 / 100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("ZAWIESZENIE");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Marian.mechanikcenazawieszenie;
                                                ruchy += 1;
                                                System.out.println("Zawieszenie zostało naprawione.");
@@ -529,7 +539,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSzawieszenie("ZAWIESZENIE: W dobrym stanie");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 20 / 100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("ZAWIESZENIE");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Adrian.mechanikcenazawieszenie;
                                                ruchy += 1;
                                                System.out.println("Zawieszenie zostało naprawione.");
@@ -551,7 +562,8 @@ public class Main {
                                            ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
                                            ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                    + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100/100));
-                                           naprawy.add(wyborautonaprawa - 1);
+                                           ownedcars.get(wyborautonaprawa - 1).setNaprawa("SILNIK");
+                                           naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                            koszty += Janusz.mechanikcenasilnik;
                                            ruchy += 1;
                                            System.out.println("Silnik został naprawiony.");
@@ -566,7 +578,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100/100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("SILNIK");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Janusz.mechanikcenasilnik;
                                                ruchy += 1;
                                                System.out.println("Silnik został naprawiony.");
@@ -577,7 +590,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100 / 100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("SILNIK");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Marian.mechanikcenasilnik;
                                                ruchy += 1;
                                                System.out.println("Silnik został naprawiony.");
@@ -596,7 +610,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSsilnik("SILNIK: Sprawny");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 100 / 100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("SILNIK");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Adrian.mechanikcenasilnik;
                                                ruchy += 1;
                                                System.out.println("Silnik został naprawiony.");
@@ -618,7 +633,8 @@ public class Main {
                                            ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
                                            ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                    + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
-                                           naprawy.add(wyborautonaprawa - 1);
+                                           ownedcars.get(wyborautonaprawa - 1).setNaprawa("KAROSERIA");
+                                           naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                            koszty += Janusz.mechanikcenakaroseria;
                                            ruchy += 1;
                                            System.out.println("Karoseria została naprawiona.");
@@ -633,7 +649,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("KAROSERIA");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Janusz.mechanikcenakaroseria;
                                                ruchy += 1;
                                                System.out.println("Karoseria została naprawiona.");
@@ -644,7 +661,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50 / 100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("KAROSERIA");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Marian.mechanikcenakaroseria;
                                                ruchy += 1;
                                                System.out.println("Karoseria została naprawiona.");
@@ -663,7 +681,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSkaroseria("KAROSERIA: W dobrym stanie");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50 / 100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("KAROSERIA");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Adrian.mechanikcenakaroseria;
                                                ruchy += 1;
                                                System.out.println("Karoseria została naprawiona.");
@@ -685,7 +704,8 @@ public class Main {
                                            ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
                                            ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                    + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
-                                           naprawy.add(wyborautonaprawa - 1);
+                                           ownedcars.get(wyborautonaprawa - 1).setNaprawa("SKRZYNIA BIEGÓW");
+                                           naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                            koszty += Janusz.mechanikcenaskrzynia;
                                            ruchy += 1;
                                            System.out.println("Skrzynia biegów została naprawiona.");
@@ -700,7 +720,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("SKRZYNIA BIEGÓW");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Janusz.mechanikcenaskrzynia;
                                                ruchy += 1;
                                                System.out.println("Skrzynia biegów została naprawiona.");
@@ -711,7 +732,8 @@ public class Main {
                                                ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
                                                ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                        + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50 / 100));
-                                               naprawy.add(wyborautonaprawa - 1);
+                                               ownedcars.get(wyborautonaprawa - 1).setNaprawa("SKRZYNIA BIEGÓW");
+                                               naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                                koszty += Marian.mechanikcenaskrzynia;
                                                ruchy += 1;
                                                System.out.println("Skrzynia biegów została naprawiona");
@@ -730,7 +752,8 @@ public class Main {
                                            ownedcars.get(wyborautonaprawa - 1).setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
                                            ownedcars.get(wyborautonaprawa - 1).setValue(ownedcars.get(wyborautonaprawa - 1).getValue()
                                                    + (ownedcars.get(wyborautonaprawa - 1).getValue() * 50/100));
-                                           naprawy.add(wyborautonaprawa - 1);
+                                           ownedcars.get(wyborautonaprawa - 1).setNaprawa("SKRZYNIA BIEGÓW");
+                                           naprawy.add(ownedcars.get(wyborautonaprawa - 1));
                                            koszty += Adrian.mechanikcenaskrzynia;
                                            ruchy += 1;
                                            System.out.println("Skrzynia biegów została naprawiona");
@@ -740,9 +763,7 @@ public class Main {
 
                                }
                            }
-
                    }
-                   break;
                case 4:
                    //KLIENCI
                    System.out.println(potentionalcustomers);
@@ -763,7 +784,11 @@ public class Main {
                           System.out.println(i+1 + ". " + ownedcars.get(i));
                       }
                       System.out.println("KTÓRY SAMOCHÓD CHCESZ SPRZEDAĆ?");
+                      System.out.println("0 .POWRÓT DO MENU");
                       int wyborauto = skaner.nextInt();
+                      if(wyborauto == 0){
+                          break;
+                      }
                       System.out.println(ownedcars.get(wyborauto - 1));
                       System.out.println("\r\n" + "WYBIERZ KLIENTA NA TO AUTO: ");
                       for(int i = 0; i < potentionalcustomers.size(); i++) {
@@ -844,7 +869,10 @@ public class Main {
                    break;
                case 9:
                    //HISTORIA NAPRAW
-                   System.out.println(naprawy);
+                   System.out.println("AUTA KTÓRE NAPRAWIAŁEŚ: ");
+                   for (int i = 0; i<naprawy.size(); i++){
+                       System.out.println(naprawy.get(i).toString2());
+                   }
                    break;
                case 10:
                    //SUMA KOSZTÓW NAPRAW I MYCIA POJAZDÓW
@@ -858,10 +886,8 @@ public class Main {
            }
            if (player.getFunds() >= 40000){
                System.out.println("WYGRAŁEŚ!!!" + "\r\n" + "GRATULACJE!!!" + "\r\n" + "ILOŚĆ RUCHÓW: " + ruchy );
+               System.exit(0);
            }
-
-
-
        }
     }
 }

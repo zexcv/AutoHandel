@@ -3,7 +3,7 @@ package com.company;
 import java.util.Random;
 
 public class Car {
-    public String toString(){
+    public String toString() {
         String marka = "MARKA: " + getMarka();
         String kolor = "KOLOR: " + getColor();
         String segment = "SEGMENT: " + getSegment();
@@ -13,8 +13,17 @@ public class Car {
         String rhyme2 = "\r\n" + shamulce + "\r\n" + szawieszenie + "\r\n" + ssilnik + "\r\n" + skaroseria + "\r\n" + getSskrzynia() + "\r\n";
         return rhyme + "\r\n" + rhyme2;
     }
+
+    public String toString2() {
+        String naprawione = naprawa;
+        String marka = "MARKA: " + getMarka();
+        String kolor = "KOLOR: " + getColor();
+        return marka + "\r\n" + kolor + "\r\n" + "NAPRAWIONY ELEMENT: " + naprawione + "\r\n";
+    }
+
     private int przebieg;
     private double value;
+    private String naprawa;
     private String marka;
     private String segment;
     private String color;
@@ -29,92 +38,91 @@ public class Car {
     private boolean karoseria;
     private boolean skrzynia;
     private boolean sprawny;
-    public String lista_marka[] = {"Fiat" , "Ford" , "BMW", "Audi", "Mercedes", "Tesla"   };
+    public String lista_marka[] = {"Fiat", "Ford", "BMW", "Audi", "Mercedes", "Tesla"};
     public String lista_color[] = {"Czarny", "Biały", "Szary", "Czerwony", "Niebieski"};
     public String lista_segment[] = {"Budget", "Standard", "Premium"};
 
-        public Car(){
-            Random random = new Random();
-            int nr_segment = random.nextInt(3);
-            int nr_marka = random.nextInt(6);
-            int nr_color = random.nextInt(5);
-            int nr_przebieg = random.nextInt(80000) + 10000;
-            int cheap, medium, expensive;
-            cheap = random.nextInt(5000) + 2500;
-            medium = random.nextInt(10000) + 8000;
-            expensive = random.nextInt(20000) + 18500;
-            marka = lista_marka[nr_marka];
-            color = lista_color[nr_color];
-            segment = lista_segment[nr_segment];
-            przebieg = nr_przebieg;
+    public Car() {
+        Random random = new Random();
+        int nr_segment = random.nextInt(3);
+        int nr_marka = random.nextInt(6);
+        int nr_color = random.nextInt(5);
+        int nr_przebieg = random.nextInt(80000) + 10000;
+        int cheap, medium, expensive;
+        cheap = random.nextInt(5000) + 2500;
+        medium = random.nextInt(10000) + 8000;
+        expensive = random.nextInt(20000) + 18500;
+        marka = lista_marka[nr_marka];
+        color = lista_color[nr_color];
+        segment = lista_segment[nr_segment];
+        przebieg = nr_przebieg;
 
-            if(getMarka() == lista_marka[0] || getMarka() == lista_marka[1]){
-                if (getSegment() == lista_segment[0]){
+            if (getMarka() == lista_marka[0] || getMarka() == lista_marka[1]) {
+                if (getSegment() == lista_segment[0]) {
                     value = cheap;
-                }else if (getSegment() == lista_segment[1]){
+                } else if (getSegment() == lista_segment[1]) {
                     value = medium;
-                }else {
+                } else {
                     value = expensive;
                 }
-            } else if(getMarka() == lista_marka[2] || getMarka() == lista_marka[3]){
-                if (getSegment() == lista_segment[0]){
+            } else if (getMarka() == lista_marka[2] || getMarka() == lista_marka[3]) {
+                if (getSegment() == lista_segment[0]) {
                     value = cheap;
-                }else if (getSegment() == lista_segment[1]){
+                } else if (getSegment() == lista_segment[1]) {
                     value = medium;
-                }else {
+                } else {
                     value = expensive;
                 }
-            }else {
-                if (getSegment() == lista_segment[0]){
+            } else {
+                if (getSegment() == lista_segment[0]) {
                     value = cheap;
-                }else if (getSegment() == lista_segment[1]){
+                } else if (getSegment() == lista_segment[1]) {
                     value = medium;
-                }else {
+                } else {
                     value = expensive;
                 }
-
             }
 
-            int sprawnosclosowanie = random.nextInt(5);
-            if(sprawnosclosowanie == 0){
-                setHamulce(false);
-                shamulce = "HAMULCE: Zepsute";
-            } else {
-                setHamulce(true);
-                shamulce = "HAMULCE: Sprawne";
-            }
-            if(sprawnosclosowanie == 1){
-                setZawieszenie(false);
-                szawieszenie = "ZAWIESZENIE: W złym stanie";
-            } else {
-                setZawieszenie(true);
-                szawieszenie = "ZAWIESZENIE: W dobrym stanie";
-            }
-            if(sprawnosclosowanie == 2){
-                setSilnik(false);
-                ssilnik = "SILNIK: Zepsuty";
-            } else {
-                setSilnik(true);
-                ssilnik = "SILNIK: Sprawny";
-            }
-            if(sprawnosclosowanie == 3){
-                setKaroseria(false);
-                skaroseria = "KAROSERIA: W złym stanie";
-            } else {
-                setKaroseria(true);
-                skaroseria = "KAROSERIA: W dobrym stanie";
-            }
-            if(sprawnosclosowanie == 4){
-                setSkrzynia(false);
-                setSskrzynia("SKRZYNIE BIEGÓW: Zepsuta");
-            } else {
-                setSkrzynia(true);
-                setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
-            }
-            if(hamulce == true && zawieszenie == true && silnik == true && karoseria == true && skrzynia == true){
-                setSprawny(true);
-            }
+        int sprawnosclosowanie = random.nextInt(5);
+        if (sprawnosclosowanie == 0) {
+            setHamulce(false);
+            shamulce = "HAMULCE: Zepsute";
+        } else {
+            setHamulce(true);
+            shamulce = "HAMULCE: Sprawne";
         }
+        if (sprawnosclosowanie == 1) {
+            setZawieszenie(false);
+            szawieszenie = "ZAWIESZENIE: W złym stanie";
+        } else {
+            setZawieszenie(true);
+            szawieszenie = "ZAWIESZENIE: W dobrym stanie";
+        }
+        if (sprawnosclosowanie == 2) {
+            setSilnik(false);
+            ssilnik = "SILNIK: Zepsuty";
+        } else {
+            setSilnik(true);
+            ssilnik = "SILNIK: Sprawny";
+        }
+        if (sprawnosclosowanie == 3) {
+            setKaroseria(false);
+            skaroseria = "KAROSERIA: W złym stanie";
+        } else {
+            setKaroseria(true);
+            skaroseria = "KAROSERIA: W dobrym stanie";
+        }
+        if (sprawnosclosowanie == 4) {
+            setSkrzynia(false);
+            setSskrzynia("SKRZYNIE BIEGÓW: Zepsuta");
+        } else {
+            setSkrzynia(true);
+            setSskrzynia("SKRZYNIA BIEGÓW: Sprawna");
+        }
+        if (hamulce == true && zawieszenie == true && silnik == true && karoseria == true && skrzynia == true) {
+            setSprawny(true);
+        }
+    }
 
 
     public String getMarka() {
@@ -237,4 +245,13 @@ public class Car {
     public void setSskrzynia(String sskrzynia) {
         this.sskrzynia = sskrzynia;
     }
+
+    public String getNaprawa() {
+        return naprawa;
+    }
+
+    public void setNaprawa(String naprawa) {
+        this.naprawa = naprawa;
+    }
+
 }
